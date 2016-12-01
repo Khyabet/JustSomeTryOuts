@@ -9,11 +9,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,22 +28,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        // This code gets all touchable childs from his parent
+        // and sets a OnClickListener
+        // which gives some messages
+        // All OnClick method is assigned to the same function
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout2);
-
         ArrayList<View> tempView = linearLayout.getTouchables();
-
         for (View v:tempView)
         {
             ImageButton tempButton = (ImageButton) findViewById(v.getId());
@@ -62,6 +56,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        // Second Part for experiment
+
+        // Getting the current display width
+        int width = Utils.GetDisplayWidth(this);
+
+        // Setting the listview width to half of its parent width size
+        ListView listView = (ListView)findViewById(R.id.listview);
+        listView.getLayoutParams().width = width/2;
+
+        // Maybe this information needs to be get from database ?
+        String[] values = new String[] { "Peynir", "Yag", "Ekmek",
+                "Salata", "Hiyar", "Su", "Hiyar", "Hiyar",
+                "Zeytinyagi", "Kola" };
+
+        // This is a custom adapter
+        // We can just adapt it however we want
+        // It is implemented in ListViewAdapter
+        // This class extends from Adapter
+        ListViewAdapter adapter = new ListViewAdapter(this, values);
+        listView.setAdapter(adapter);
     }
 
     @Override
