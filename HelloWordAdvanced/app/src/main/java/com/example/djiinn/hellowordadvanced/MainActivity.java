@@ -1,16 +1,10 @@
 package com.example.djiinn.hellowordadvanced;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +12,10 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.djiinn.hellowordadvanced.CustomListView.DynamicListView;
+import com.example.djiinn.hellowordadvanced.CustomListView.ListItem;
+import com.example.djiinn.hellowordadvanced.CustomListView.StableArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -27,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_view);
 
-        // This code gets all touchable childs from his parent
+        /*// This code gets all touchable childs from his parent
         // and sets a OnClickListener
         // which gives some messages
         // All OnClick method is assigned to the same function
@@ -76,7 +74,20 @@ public class MainActivity extends AppCompatActivity {
         // It is implemented in ListViewAdapter
         // This class extends from Adapter
         ListViewAdapter adapter = new ListViewAdapter(this, values);
-        listView.setAdapter(adapter);
+        listView.setAdapter(adapter);*/
+
+
+        ArrayList<String>mCheeseList = new ArrayList<String>();
+        for (int i = 0; i < ListItem.sCheeseStrings.length; ++i) {
+            mCheeseList.add(ListItem.sCheeseStrings[i]);
+        }
+
+        StableArrayAdapter dynamicAdapter = new StableArrayAdapter(this, R.layout.text_view, mCheeseList);
+        DynamicListView dynamicListView = (DynamicListView) findViewById(R.id.listview2);
+
+        dynamicListView.setCheeseList(mCheeseList);
+        dynamicListView.setAdapter(dynamicAdapter);
+        dynamicListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
 
     @Override
