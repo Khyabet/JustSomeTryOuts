@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="resicon">
+        <item>@drawable/transparent_tomaten</item>
+        <item>@drawable/transparent_gurke</item>
+        <item>@drawable/transparent_brot</item>
+    </array>
+    <array name="restext">
+        <item>"Tomaten"</item>
+        <item>"Gurken"</item>
+        <item>"Brot"</item>
+    </array>
+
+</resources>

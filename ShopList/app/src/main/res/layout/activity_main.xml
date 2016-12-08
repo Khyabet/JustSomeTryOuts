@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="4dp"
+    tools:context="com.example.djiinn.shoplist.MainActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@android:color/background_dark"
+        android:orientation="horizontal" >
+
+        <com.example.djiinn.shoplist.LinearLayoutGridView
+            android:id="@+id/pane1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_light"
+            android:orientation="vertical" >
+
+            <GridView
+                android:id="@+id/gridview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:columnWidth="100dp"
+                android:numColumns="auto_fit"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:stretchMode="columnWidth"
+                android:gravity="center"></GridView>
+        </com.example.djiinn.shoplist.LinearLayoutGridView>
+        
+        <com.example.djiinn.shoplist.LinearLayoutListView
+            android:id="@+id/pane3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:layout_weight="0.50"
+            android:background="@android:color/background_light"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/listview3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.example.djiinn.shoplist.LinearLayoutListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/prompt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"
+            android:gravity="bottom"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</LinearLayout>
