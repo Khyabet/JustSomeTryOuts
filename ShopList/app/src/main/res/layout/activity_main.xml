@@ -34,20 +34,22 @@
                 android:gravity="center"></GridView>
         </com.example.djiinn.shoplist.LinearLayoutGridView>
         
-        <com.example.djiinn.shoplist.LinearLayoutListView
+        <com.example.djiinn.shoplist.LinearLayoutImageView
             android:id="@+id/pane3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
             android:layout_weight="0.50"
-            android:background="@android:color/background_light"
-            android:orientation="vertical" >
+            android:background="@android:color/background_dark"
+            android:orientation="vertical"
+            android:layout_marginTop="150dp"
+            android:layout_marginRight="4dp"
+            android:layout_height="100dp"
+            android:layout_width="0dp">
 
-            <ListView
-                android:id="@+id/listview3"
+            <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.example.djiinn.shoplist.LinearLayoutListView>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center" />
+        </com.example.djiinn.shoplist.LinearLayoutImageView>
     </LinearLayout>
 
     <LinearLayout

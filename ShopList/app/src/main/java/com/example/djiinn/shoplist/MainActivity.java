@@ -117,11 +117,12 @@ public class MainActivity extends ActionBarActivity {
 
 	List<Item> items1, items2, items3;
 	GridView gridView;
-	ListView listView3;
+	ImageView imageView;
 	ItemsListAdapter myItemsListAdapter1, myItemsListAdapter2, myItemsListAdapter3;
 	LinearLayoutGridView area1;
-	LinearLayoutListView area3;
+	LinearLayoutImageView area3;
 	TextView prompt;
+	ArrayList<Item> shopList;
 	
 	//Used to resume original color in drop ended/exited
 	int resumeColor;
@@ -132,21 +133,20 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 
 		gridView = (GridView) findViewById(R.id.gridview);
-		listView3 = (ListView) findViewById(R.id.listview3);
+		imageView = (ImageView) findViewById(R.id.imageView);
 		
 		area1 = (LinearLayoutGridView)findViewById(R.id.pane1);
-		area3 = (LinearLayoutListView)findViewById(R.id.pane3);
-		area1.setOnDragListener(myOnDragListener);
+		area3 = (LinearLayoutImageView)findViewById(R.id.pane3);
+
 		area3.setOnDragListener(myOnDragListener);
 		area1.setGridView(gridView);
-		area3.setListView(listView3);
+		area3.setImageView(imageView);
 		
 		initItems();
 		myItemsListAdapter1 = new ItemsListAdapter(this, items1);
 		myItemsListAdapter2 = new ItemsListAdapter(this, items2);
 		myItemsListAdapter3 = new ItemsListAdapter(this, items3);
 		gridView.setAdapter(myItemsListAdapter1);
-		listView3.setAdapter(myItemsListAdapter3);
 		
 		/*
 		//Auto scroll to end of ListView
@@ -156,7 +156,6 @@ public class MainActivity extends ActionBarActivity {
 		*/
 		
 		gridView.setOnItemClickListener(listOnItemClickListener);
-		listView3.setOnItemClickListener(listOnItemClickListener);
 		
 		//listView1.setOnItemLongClickListener(myOnItemLongClickListener);
 		//listView3.setOnItemLongClickListener(myOnItemLongClickListener);
@@ -280,18 +279,12 @@ public class MainActivity extends ActionBarActivity {
 
 					ItemsListAdapter srcAdapter = (ItemsListAdapter)(oldParent.getAdapter());
 
-					LinearLayoutListView newParent = (LinearLayoutListView)v;
-					ItemsListAdapter destAdapter = (ItemsListAdapter)(newParent.listView.getAdapter());
-					List<Item> destList = destAdapter.getList();
+					LinearLayoutImageView newView = (LinearLayoutImageView) v;
+					shopList.add(passedItem);
 
-					if(removeItemToList(srcList, passedItem)){
-						addItemToList(destList, passedItem);
-					}
+					prompt.append("ShopList Item Count: " + shopList.size()  + "\n");
 					srcAdapter.notifyDataSetChanged();
-					destAdapter.notifyDataSetChanged();
-
-					//smooth scroll to bottom
-					newParent.listView.smoothScrollToPosition(destAdapter.getCount()-1);
+					newView.notifyImageView(shopList.size());
 					break;
 			   case DragEvent.ACTION_DRAG_ENDED:
 				   prompt.append("ACTION_DRAG_ENDED: " + area  + "\n");  
@@ -386,6 +379,7 @@ public class MainActivity extends ActionBarActivity {
 		items1 = new ArrayList<Item>();
 		items2 = new ArrayList<Item>();
 		items3 = new ArrayList<Item>();
+		shopList = new ArrayList<Item>();
 		
 		TypedArray arrayDrawable = getResources().obtainTypedArray(R.array.resicon);
 		TypedArray arrayText = getResources().obtainTypedArray(R.array.restext);
