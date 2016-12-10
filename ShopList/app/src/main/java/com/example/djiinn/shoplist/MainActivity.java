@@ -1,7 +1,9 @@
 package com.example.djiinn.shoplist;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.graphics.Rect;
 import android.support.v7.app.ActionBarActivity;
@@ -105,7 +107,7 @@ public class MainActivity extends ActionBarActivity {
 		    holder.icon.setImageDrawable(list.get(position).ItemDrawable);
 		    holder.text.setText(list.get(position).ItemString);
 		    
-		    rowView.setOnDragListener(new ItemOnDragListener(list.get(position)));
+		    //rowView.setOnDragListener(new ItemOnDragListener(list.get(position)));
 
 		    return rowView;
 		}
@@ -284,7 +286,11 @@ public class MainActivity extends ActionBarActivity {
 
 					prompt.append("ShopList Item Count: " + shopList.size()  + "\n");
 					srcAdapter.notifyDataSetChanged();
-					newView.notifyImageView(shopList.size());
+					//convert the List into a Set
+					Set set = new HashSet(shopList);
+					//create a new List from the Set
+					ArrayList uniqueList = new ArrayList(set);
+					newView.notifyImageView(uniqueList.size());
 					break;
 			   case DragEvent.ACTION_DRAG_ENDED:
 				   prompt.append("ACTION_DRAG_ENDED: " + area  + "\n");  
